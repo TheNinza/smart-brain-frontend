@@ -88,7 +88,7 @@ class App extends Component {
     })
       .then((response) => response.json())
       .then((response) => {
-        if (response) {
+        if (response.outputs[0].data.regions) {
           fetch("https://polar-mesa-71771.herokuapp.com/image", {
             method: "put",
             headers: { "Content-Type": "application/json" },
@@ -100,11 +100,11 @@ class App extends Component {
             .then((count) => {
               this.setState(Object.assign(this.state.user, { entries: count }));
             })
-            .catch(console.log);
+            .catch((err) => console.log("enter valid address"));
         }
         this.calculateFaceLocation(response);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("opps enter valid url"));
   };
 
   onRouteChange = (route) => {
